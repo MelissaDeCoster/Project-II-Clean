@@ -9,22 +9,24 @@ html {
   height: 100%;
 }
 
-.bg {
+
+
+/* .bg { */
   /* The image used */
-  background-image: url("../img/abstract-dark-halftone-background-design_1017-15505.jpg");
+  /* background-image: url("../img/abstract-dark-halftone-background-design_1017-15505.jpg"); */
 
   /* Full height */
-  height: 100%; 
+  /* height: 100%; 
   display: flex;
-  justify-content: center;
+  justify-content: center; */
   /* position: fixed; */
   /* Center and scale the image nicely */
-  background-position: center;
+  /* background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1.0;
-  box-sizing: inherit;
-}
+  box-sizing: inherit; */
+/* } */
 /* 
 .header_main { 
   background-color: rgb(255, 206, 218);
@@ -55,9 +57,11 @@ dropdownMenu1 {
 }
 
 .btn { 
-  background-color: white;
+  background-color: navy;
   margin: 0;
   padding: 0; }
+
+
 
 li {
   float: left;
@@ -165,6 +169,13 @@ li.dropdown {
   text-align: right;
   background-position: center;
   display: flex;
+  height: 200px;
+  width: 10000px;
+}
+
+.div3{
+  height: 200px;
+  width: 10000px;
 }
 
 .zoom{
@@ -173,20 +184,20 @@ li.dropdown {
   border-radius: 30px;
   padding: 14px 16px;
   transition: transform .2s;
-  height: 200px;
-  width: 500px;
+  height: 50%;
+  height: 100%;
   background-color: rgb(15, 13, 54);
-  opacity: 0.7; 
+  /* opacity: 0.7;  */
   font-family: Arial; 
   color: white; 
   float: center;
 }
 
-.zoom:hover {
+/* .zoom:hover {
   -ms-transform: scale(1.5); /* IE 9 */
   -webkit-transform: scale(1.5); /* Safari 3-8 */
   transform: scale(1.5); 
-}
+} */
 /* #Howtoplay{
   object-position: 1px 20%;
   height: 200px;
@@ -197,7 +208,7 @@ li.dropdown {
 } */
 
 svg {
-background-color:#b4b4b4f6;
+background-color:yellow;
 /* rgba(15, 13, 54, 0.699); */
 border: 0;
 border-radius: 10px;
@@ -223,7 +234,7 @@ svg:hover #path{
 .gameaxis path,
 .gameaxis line,
 .gameaxis text {
-  fill: rgb(255, 253, 253);
+  fill: darkgrey;
   stroke: rgb(255, 253, 253);
   stroke-width: 0.1;
   shape-rendering: crispEdges;
@@ -232,7 +243,7 @@ svg:hover #path{
 .goalaxis path,
 .goalaxis line,
 .goalaxis text {
-  fill: rgb(255, 253, 253);
+  fill: darkgray;
   stroke: rgb(255, 253, 253);
   stroke-width: 0.1;
   shape-rendering: crispEdges;
@@ -247,19 +258,18 @@ svg:hover #path{
   }
 
 .correlations {
-  width: 860px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   fill: rgb(255, 253, 253);
-  border-radius: 10px;
-  background-color:#b4b4b4f6;
-box-shadow:inset 0px 0px 6px 6px #b4b4b4f6;
+  /* border-radius: 10px; */
+  object-position: left;
 }
 .correlations2 {
-  width: 860px;
-  height: 250px;
-  
+  width: 100%;
+  height: 100%;
+  fill: rgb(255, 253, 253);
   border-radius: 10px;
-  background-color:#b4b4b4f6;
+  position: center;
 
 }
 

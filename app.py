@@ -26,24 +26,25 @@ csv_path_and_name2 = "static/sourcedata/goals.csv"
 db_table_name2 = "goaldata"
 df2 = pd.read_csv(csv_path_and_name2)
 
+# Load in summary csv data
+csv_path_and_name3 = "static/sourcedata/game_summary_stats.csv"
+db_table_name3 = "summarydata"
+df3 = pd.read_csv(csv_path_and_name3)
+
 print("\nClean and transform ....\n")
 # CLEAN
 # TRANSFORM
 print(df.head())
-
 print(df2.head())
-
+print(df3.head())
 
 engine = create_engine('sqlite:///urldb', echo=False)
 df.to_sql(db_table_name, con=engine, if_exists="replace", chunksize=20000)
 print("Melissa Data Done!")
 df2.to_sql(db_table_name2, con=engine, if_exists="replace", chunksize=20000)
 print("Nadia Data Done!")
-
-
-
-
-
+df3.to_sql(db_table_name3, con=engine, if_exists="replace", chunksize=20000)
+print("Summary Data Done!")
 
 
 # *********************************************
@@ -85,6 +86,17 @@ def lStationsJson2():
         """, engine)
     json_str = df2.to_json(orient="records")
     return Response(response=json_str, status=200, mimetype='application/json')
+
+@flask_app.route("/api/summary")
+def lStationsJson3():
+    df3 = pd.read_sql(f"""
+        select  * 
+        from    {db_table_name3}
+        """, engine)
+    json_str = df3.to_json(orient="records")
+    return Response(response=json_str, status=200, mimetype='application/json')
+
+
 
 if __name__ == "__main__":
     flask_app.run(debug=True)
