@@ -28,7 +28,6 @@ absolute_csv_path2 = os.path.join(path_for_this_file,"static","sourcedata","goal
 df2 = pd.read_csv(absolute_csv_path2)
 
 # Load in summary csv data
-csv_path_and_name3 = "static/sourcedata/"
 absolute_csv_path3 = os.path.join(path_for_this_file,"static","sourcedata","game_summary_stats.csv")
 db_table_name3 = "summarydata"
 df3 = pd.read_csv(absolute_csv_path3)
@@ -40,7 +39,7 @@ print(df.head())
 print(df2.head())
 print(df3.head())
 
-engine = create_engine('sqlite:///urldb', echo=False)
+engine = create_engine('sqlite:///urldb.sqlite', echo=False)
 df.to_sql(db_table_name, con=engine, if_exists="replace", chunksize=20000)
 print("Melissa Data Done!")
 df2.to_sql(db_table_name2, con=engine, if_exists="replace", chunksize=20000)
