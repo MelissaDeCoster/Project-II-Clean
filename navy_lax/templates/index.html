@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Project_3: Fullstack Test</title>
-  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin="" />
@@ -212,10 +212,10 @@
 
 </body>
 
-<script type="text/javascript" src="static/js/app3.js"></script>
-<script type="text/javascript" src="static/js/app2.js"></script>
-<script type="text/javascript" src="static/js/app4.js"></script>
-<script type="text/javascript" src="static/js/app5.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/app3.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/app2.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/app4.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/app5.js') }}"></script>
 
 
 
