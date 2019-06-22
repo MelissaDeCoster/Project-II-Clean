@@ -9,11 +9,12 @@ app = Flask(__name__)
     
 # ************** Database Setup ***************
 
-app.config['SQLALCHEMY_DATABASE_URI'] = ""
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///urldb.sqlite"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Attach db to Flask app so Flask handels db session managment and other good things
 db = SQLAlchemy(app)
+# db.engine
 
 path_for_this_file = os.path.dirname(__file__)
 
@@ -39,12 +40,11 @@ print(df.head())
 print(df2.head())
 print(df3.head())
 
-engine = create_engine('sqlite:///urldb.sqlite', echo=False)
-df.to_sql(db_table_name, con=engine, if_exists="replace", chunksize=20000)
+df.to_sql(db_table_name, con=db.engine, if_exists="replace", chunksize=20000)
 print("Melissa Data Done!")
-df2.to_sql(db_table_name2, con=engine, if_exists="replace", chunksize=20000)
+df2.to_sql(db_table_name2, con=db.engine, if_exists="replace", chunksize=20000)
 print("Nadia Data Done!")
-df3.to_sql(db_table_name3, con=engine, if_exists="replace", chunksize=20000)
+df3.to_sql(db_table_name3, con=db.engine, if_exists="replace", chunksize=20000)
 print("Summary Data Done!")
 
 
@@ -74,7 +74,7 @@ def lStationsJson():
     df = pd.read_sql(f"""
         select  * 
         from    {db_table_name}
-        """, engine)
+        """, db.engine)
     json_str = df.to_json(orient="records")
     return Response(response=json_str, status=200, mimetype='application/json')
 
@@ -84,7 +84,7 @@ def lStationsJson2():
     df2 = pd.read_sql(f"""
         select  * 
         from    {db_table_name2}
-        """, engine)
+        """, db.engine)
     json_str = df2.to_json(orient="records")
     return Response(response=json_str, status=200, mimetype='application/json')
 
@@ -93,7 +93,7 @@ def lStationsJson3():
     df3 = pd.read_sql(f"""
         select  * 
         from    {db_table_name3}
-        """, engine)
+        """, db.engine)
     json_str = df3.to_json(orient="records")
     return Response(response=json_str, status=200, mimetype='application/json')
 
