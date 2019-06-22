@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn navy-lax.app:app
