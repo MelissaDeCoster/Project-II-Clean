@@ -5,31 +5,33 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 
-flask_app = Flask(__name__)
+app = Flask(__name__)
     
 # ************** Database Setup ***************
 
-flask_app.config['SQLALCHEMY_DATABASE_URI'] = ""
-flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = ""
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Attach db to Flask app so Flask handels db session managment and other good things
-db = SQLAlchemy(flask_app)
+db = SQLAlchemy(app)
 
+path_for_this_file = os.path.dirname(__file__)
 
 # Load in your csv data
-csv_path_and_name = "static/sourcedata/gamedatamap.csv"
 db_table_name = "mapdata"
-df = pd.read_csv(csv_path_and_name)
+absolute_csv_path = os.path.join(path_for_this_file,"static","sourcedata","gamedatamap.csv")
+df = pd.read_csv(absolute_csv_path)
 
 # Load in Nadia csv data
-csv_path_and_name2 = "static/sourcedata/goals.csv"
 db_table_name2 = "goaldata"
-df2 = pd.read_csv(csv_path_and_name2)
+absolute_csv_path2 = os.path.join(path_for_this_file,"static","sourcedata","goals.csv")
+df2 = pd.read_csv(absolute_csv_path2)
 
 # Load in summary csv data
-csv_path_and_name3 = "static/sourcedata/game_summary_stats.csv"
+csv_path_and_name3 = "static/sourcedata/"
+absolute_csv_path3 = os.path.join(path_for_this_file,"static","sourcedata","game_summary_stats.csv")
 db_table_name3 = "summarydata"
-df3 = pd.read_csv(csv_path_and_name3)
+df3 = pd.read_csv(absolute_csv_path3)
 
 print("\nClean and transform ....\n")
 # CLEAN
@@ -51,15 +53,15 @@ print("Summary Data Done!")
 # ************** WEBPAGES *********************
 # *********************************************
 
-@flask_app.route("/")
+@app.route("/")
 def renderHome():
     return render_template("index.html")
 
-@flask_app.route("/map")
+@app.route("/map")
 def renderMap():
     return render_template("map.html")
 
-@flask_app.route("/dashboard")
+@app.route("/dashboard")
 def renderDashboard():
     return render_template("dashboard.html")
 
@@ -68,7 +70,7 @@ def renderDashboard():
 # ************** API ENDPOINTS ****************
 # *********************************************
 
-@flask_app.route("/api/cities")
+@app.route("/api/cities")
 def lStationsJson():
     df = pd.read_sql(f"""
         select  * 
@@ -78,7 +80,7 @@ def lStationsJson():
     return Response(response=json_str, status=200, mimetype='application/json')
 
 
-@flask_app.route("/api/games")
+@app.route("/api/games")
 def lStationsJson2():
     df2 = pd.read_sql(f"""
         select  * 
@@ -87,7 +89,7 @@ def lStationsJson2():
     json_str = df2.to_json(orient="records")
     return Response(response=json_str, status=200, mimetype='application/json')
 
-@flask_app.route("/api/summary")
+@app.route("/api/summary")
 def lStationsJson3():
     df3 = pd.read_sql(f"""
         select  * 
@@ -98,5 +100,5 @@ def lStationsJson3():
 
 
 
-if __name__ == "__main__":
-    flask_app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)

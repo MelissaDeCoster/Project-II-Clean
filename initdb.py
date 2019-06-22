@@ -1,4 +1,4 @@
-from navy-lax.app import db
+from navy_lax.app import db
 
 # db.drop_all()
 db.create_all()
